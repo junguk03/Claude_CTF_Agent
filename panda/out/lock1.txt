@@ -1,0 +1,15 @@
+export done 1.54
+0.0 invalid input syntax for type numeric: "xnone" None
+0.15 invalid input syntax for type numeric: "xnone" None
+0.3 invalid input syntax for type numeric: "xnone" None
+0.45 invalid input syntax for type numeric: "xnone" None
+0.6 invalid input syntax for type numeric: "xnone" None
+0.75 invalid input syntax for type numeric: "xnone" None
+0.9 invalid input syntax for type numeric: "xnone" None
+1.05 invalid input syntax for type numeric: "xnone" None
+1.2 invalid input syntax for type numeric: "xnone" None
+1.35 invalid input syntax for type numeric: "xnone" None
+1.5 invalid input syntax for type numeric: "xnone" None
+1.65 invalid input syntax for type numeric: "xnone" None
+1.8 invalid input syntax for type numeric: "xnone" None
+1.95 invalid input syntax for type numeric: "xnone" None

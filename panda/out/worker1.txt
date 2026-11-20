@@ -1,0 +1,26 @@
+{
+ "artifact": {
+  "digest": "3ac3efeb94620d12cd70208699b6fabbde7d4b62a3a34ae1d5f32f0301597176",
+  "rows": [
+   {
+    "grove_code": "IH-001",
+    "region": "North Terrace",
+    "sealed_index": "report_worker_4d6cb67b49082ac6|report_worker_4d6cb67b49082ac6|app, worker_shadow, crypto, pg_catalog|worker|sealed|9422a027-de73-42ac-b53b-31519cec2e61|7dc74860-ea6f-4ce4-a02c-328a1aedacda|4fe92ad5-70ca-441a-87d7-556f6097f9ae|1800ms",
+    "species": "Phyllostachys edulis"
+   },
+   {
+    "grove_code": "IH-002",
+    "region": "East Basin",
+    "sealed_index": "report_worker_4d6cb67b49082ac6|report_worker_4d6cb67b49082ac6|app, worker_shadow, crypto, pg_catalog|worker|sealed|9422a027-de73-42ac-b53b-31519cec2e61|7dc74860-ea6f-4ce4-a02c-328a1aedacda|4fe92ad5-70ca-441a-87d7-556f6097f9ae|1800ms",
+    "species": "Bambusa oldhamii"
+   },
+   {
+    "grove_code": "IH-003",
+    "region": "South Hollow",
+    "sealed_index": "report_worker_4d6cb67b49082ac6|report_worker_4d6cb67b49082ac6|app, worker_shadow, crypto, pg_catalog|worker|sealed|9422a027-de73-42ac-b53b-31519cec2e61|7dc74860-ea6f-4ce4-a02c-328a1aedacda|4fe92ad5-70ca-441a-87d7-556f6097f9ae|1800ms",
+    "species": "Dendrocalamus asper"
+   },
+   {
+    "grove_code": "IH-004",
+    "region": "West Gallery",
+    "sealed_index": "report_worker_4d6cb67b49082ac6|report_worker_4d6cb67b49082ac6|app, worker_shadow, crypto, pg_catalog|worker|sealed|9422a027-de73-42ac-b53b-31519cec2e61|7dc74860-ea6f-4ce4-a02c-328a1aedacda|4fe92ad5-70ca-441a-87d7-556f6097f9a

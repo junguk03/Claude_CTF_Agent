@@ -1,0 +1,28 @@
+0x3ff36382c845952e
+search 'quality_score' ['IH-001', 'IH-002', 'IH-003', 'IH-004']
+search '-quality_score' ['IH-004', 'IH-003', 'IH-002', 'IH-001']
+search 'yield_kg' ['IH-001', 'IH-002', 'IH-003', 'IH-004']
+search 'grove_code' ['IH-004', 'IH-003', 'IH-002', 'IH-001']
+search "CASE WHEN grove_code='IH-004' THEN 0 ELSE 1 END" ['IH-002', 'IH-003', 'IH-001', 'IH-004']
+search 'CASE WHEN (select count(*) from archive_stage.rout' ['IH-004', 'IH-003', 'IH-002', 'IH-001']
+export '-quality_score' 0.0 grove_code,name,region,species,index_band | IH-001,Verdant Meridian,North Terrace,Phyllostachys edulis,prime | IH-002,Quiet Lantern,East Basin,Bambusa oldhamii,select | IH-003,Moss Circuit,South Hollow,Dendrocalamus asper,standard | IH-004,Index Reed,West Gallery,Phyllostachys nigra,standard | 
+export '0' 0.0 grove_code,name,region,species,index_band | IH-001,Verdant Meridian,North Terrace,Phyllostachys edulis,prime | IH-002,Quiet Lantern,East Basin,Bambusa oldhamii,select | IH-003,Moss Circuit,South Hollow,Dendrocalamus asper,standard | IH-004,Index Reed,West Gallery,Phyllostachys nigra,standard | 
+export 'quality_score*0+50' 0.0 grove_code,name,region,species,index_band | IH-001,Verdant Meridian,North Terrace,Phyllostachys edulis,prime | IH-002,Quiet Lantern,East Basin,Bambusa oldhamii,select | IH-003,Moss Circuit,South Hollow,Dendrocalamus asper,standard | IH-004,Index Reed,West Gallery,Phyllostachys nigra,standard | 
+export "CASE WHEN grove_code='IH-001' THEN 10 ELSE 90 END" 0.0 grove_code,name,region,species,index_band | IH-001,Verdant Meridian,North Terrace,Phyllostachys edulis,prime | IH-002,Quiet Lantern,East Basin,Bambusa oldhamii,select | IH-003,Moss Circuit,South Hollow,Dendrocalamus asper,standard | IH-004,Index Reed,West Gallery,Phyllostachys nigra,standard | 
+export '(select count(*) from archive_stage.worker_manifes' 0.0 grove_code,name,region,species,index_band | IH-001,Verdant Meridian,North Terrace,Phyllostachys edulis,prime | IH-002,Quiet Lantern,East Basin,Bambusa oldhamii,select | IH-003,Moss Circuit,South Hollow,Dendrocalamus asper,standard | IH-004,Index Reed,West Gallery,Phyllostachys nigra,standard | 
+/api/formulas/check 'pg_sleep(1)' 200 1.02 {"state":"checked"}
+
+/api/export 'pg_sleep(1)' 200 1.54 grove_code,name,region,species,index_band
+IH-001,Verdant Mer
+/api/formulas/check '(select pg_sleep(1))::text::numeric' 200 0.94 {"state":"checked"}
+
+/api/export '(select pg_sleep(1))::text::numeric' 200 1.61 grove_code,name,region,species,index_band
+IH-001,Verdant Mer
+/api/formulas/check 'CASE WHEN pg_sleep(1) IS NULL THEN 1 ELSE 0 END' 200 0.94 {"state":"checked"}
+
+/api/export 'CASE WHEN pg_sleep(1) IS NULL THEN 1 ELSE 0 END' 200 1.61 grove_code,name,region,species,index_band
+IH-001,Verdant Mer
+/api/formulas/check '(select 1 from pg_sleep(1))' 200 1.03 {"state":"checked"}
+
+/api/export '(select 1 from pg_sleep(1))' 200 1.62 grove_code,name,region,species,index_band
+IH-001,Verdant Mer
