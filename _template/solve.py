@@ -13,11 +13,25 @@ import urllib3
 urllib3.disable_warnings()
 
 BASE = sys.argv[1].rstrip("/") if len(sys.argv) > 1 else "http://localhost:8000"
-FLAG_RE = re.compile(r"[A-Za-z0-9_]{2,10}\{[^}]{3,200}\}")  # notes.md의 플래그 형식에 맞게 수정
+FLAG_RE = re.compile(r"Layer7\{[^}]{1,300}\}|[A-Za-z0-9_]{2,10}\{[^}]{3,200}\}")  # 대회 형식 우선
+DELAY = float(os.environ.get("DELAY", "0.05"))  # 요청 사이 최소 간격(초). 대회 트래픽 규칙용
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "out")
 os.makedirs(OUT, exist_ok=True)
 
 s = requests.Session()
+_last = [0.0]
+_orig_request = s.request
+
+
+def _throttled(*a, **k):
+    wait = _last[0] + DELAY - time.time()
+    if wait > 0:
+        time.sleep(wait)
+    _last[0] = time.time()
+    return _orig_request(*a, **k)
+
+
+s.request = _throttled
 if os.environ.get("PROXY"):
     s.proxies = {"http": os.environ["PROXY"], "https": os.environ["PROXY"]}
     s.verify = False
