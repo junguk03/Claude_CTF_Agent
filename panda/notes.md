@@ -24,6 +24,19 @@
   조건: session_user=report_worker, report_runs.state='running', app.context_is_valid('worker','sealed',...), proof = HMAC-SHA256(unlock_key, 'report-proof\0'||len(session_user)||session_user||len(current_user)||current_user||uuid(report)||uuid(run)||int4(i)).
   unlock_key는 vault.seal_control (직접 못 읽음) → capsule 5개+worker_manifest로 유도된다고 추정.
 
+## 결과 — 플래그 후보
+**PD{mv1G2IJYVD9LhBzx07vgRvk7EUSVC3VH2Pu2y5}**
+- manifest (export 카운터 부채널, out/manifest.txt): share_order=R,T,C,A,E, share_sizes=8×5, unlock_hash=sha256,
+  unlock_domain_hex=496e6465...00 ("Indexed Hollow seal v3\0"), stream_domain_hex=666c61672d73747265616d00 ("flag-stream\0"),
+  chunk_count=6, chunk_size=8, ciphertext_join=colon,index-ascending
+- unlock_key = sha256(unlock_domain ‖ route‖clock‖chart‖audit‖export 원시 바이트)
+  = 55d9d088d01da797b665993a481e07c28c58758446f4c7abdd77b023ca6a939a (worker에서 unseal_index가 NULL 아님으로 검증, out/worker3.txt)
+- 서버 응답 암호문 (report run artifact, out/worker4.txt, run 5ac0b86c…, 3e3c5846…):
+  6a5c2d7c1cbc06c0:d53202a6ac059b71:d5c070c6c060ba65:948764eedefc8d02:56aa1f21f9d833b7:ea66
+- 복호화(로컬): chunk i 평문 = ct_i XOR HMAC-SHA256(unlock_key, stream_domain ‖ int4_be(i))[:len]
+- report 식 (행마다 chunk 번호 = grove_code 숫자-1+off): `worker_shadow.unseal_index(i, encode(crypto.hmac('report-proof\0'‖int2(30)‖session_user‖int2(26)‖'app_owner_7bad043ad9287146'‖uuid(report_id)‖uuid(run_id)‖int4(i), unlock_key,'sha256'),'hex'))` — probe.py proof_sql()
+- 주의: search_path가 `app, worker_shadow`라 그냥 unseal_index는 미끼 app.unseal_index로 감.
+
 ## 엔드포인트 (burp.xml 기준)
 | 경로 | 본문 | 응답 |
 |---|---|---|
@@ -72,5 +85,6 @@ index 형태: `{"kind":"field","name":X}` / `{"kind":"literal","value":X}` / `{"
 ## 진행 기록 (블로그용)
 | 시각 | 한 일 | 결과 | 사람 개입 |
 |---|---|---|---|
+| 11-20 | manifest 추출 → unlock_key 검증 → worker로 암호문 6조각 → 로컬 복호화 | 플래그 후보 PD{mv1G…y5} | 없음 |
 | 11-20 | audit 오류 SQLi → 스키마/함수 덤프, 각 역할별 capsule 유출 | capsule 5개 확보 | 없음 |
 | 11-20 | burp.xml 파싱, 시험 표 작성 | 엔드포인트 9개, 오류 노출/반사 채널 확인 | burp 수집은 사람 |

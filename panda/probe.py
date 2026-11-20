@@ -75,3 +75,9 @@ PREFIX=(b"report-proof\0"+struct.pack(">h",len(_su))+_su+struct.pack(">h",len(_c
 def proof_sql(keysql, i):
     msg=f"decode('{PREFIX}','hex')||uuid_send(current_setting('app.report_id')::uuid)||uuid_send(current_setting('app.run_id')::uuid)||int4send({i})"
     return f"worker_shadow.unseal_index({i},encode(crypto.hmac({msg},{keysql},'sha256'),'hex'))"
+def x_str2(sqltext, sig="export_capsule"):
+    T=f"(convert_to(({sqltext}),'UTF8')||'\\x00'::bytea)"
+    n=x_send(f"octet_length({T})-1", sig=sig); out=bytearray()
+    for i in range(0,n,2):
+        v=x_send(f"get_byte({T},{i})*256+get_byte({T},{i+1})", sig=sig); out+=bytes([v>>8, v&255])
+    return bytes(out[:n]).decode('utf-8','replace')

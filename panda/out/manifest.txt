@@ -1,0 +1,13 @@
+chunk_count=6
+chunk_size=8
+ciphertext_encoding=lowercase-hex
+ciphertext_join=colon,index-ascending
+gate_signature=unseal_index(integer,text)
+maximum_flag_bytes=128
+protocol_version=3
+share_order=R,T,C,A,E
+share_sizes=8,8,8,8,8
+share_text_encoding=lowercase-hex
+stream_domain_hex=666c61672d73747265616d00
+unlock_domain_hex=496e646578656420486f6c6c6f77207365616c20763300
+unlock_hash=sha256
