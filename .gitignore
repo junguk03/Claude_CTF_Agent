@@ -1,2 +1,15 @@
+# 허용한 파일만 올린다. 여기서 만든 문제 폴더는 저장소에 올라가지 않는다.
+/*
+!/.gitignore
+!/README.md
+!/CLAUDE.md
+!/LESSONS.md
+!/new.sh
+!/_template/
+!/.claude/
+
 __pycache__/
 *.pyc
+.DS_Store
+/.claude/settings.local.json
+/.claude/state/

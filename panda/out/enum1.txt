@@ -1,8 +1,0 @@
-select string_agg(table_schema||'.'||table_name||':'||table_ => invalid input syntax for type numeric: "app.audit_events:BASE TABLE | app.v_audit_feed:VIEW | archive_stage.audit_capsule:BASE TABLE"
-
-select string_agg(n.nspname||'.'||c.relname||':'||c.relkind, => operator is not unique: text || "char"
-
-select string_agg(rolname,',') from pg_roles => invalid input syntax for type numeric: "pg_database_owner,pg_read_all_data,pg_write_all_data,pg_monitor,pg_read_all_settings,pg_read_all_stats,pg_stat_scan_tables,pg_read_server_files,pg_write
-
-select current_database()||' '||session_user||' '||current_s => invalid input syntax for type numeric: "indexed_hollow audit_reader app, pg_catalog"
-
